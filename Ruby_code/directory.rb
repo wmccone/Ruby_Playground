@@ -12,3 +12,4 @@ class Employee
   def to_s
     "First Name: #{@first_name}, Last Name: #{@last_name}, Username: #{@username}, Email Address: #{@email}"
   end
+end
