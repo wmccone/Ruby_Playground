@@ -1,5 +1,6 @@
 
 # create an array for our users
+require_relative 'bcryptauth'
 
 users= [
     {username: "wmccone", password: "password1"},
@@ -10,16 +11,17 @@ users= [
 ]
 
 authentication = false
+hashed_users = Bauth.create_secure_users(users)
 
-def auth_user(user,pass,array)
-    array.each do |user_record|
-        if user_record[:username] == user && user_record[:password] == pass
-            print "You are now logged in as #{user_record[:username]} "
-            return authentication = true
-        end
-    end
-    "Credentials were not correct"
-end
+# def auth_user(user,pass,array)
+#     array.each do |user_record|
+#         if user_record[:username] == user && user_record[:password] == pass
+#             print "You are now logged in as #{user_record[:username]} "
+#             return authentication = true
+#         end
+#     end
+#     "Credentials were not correct"
+# end
 
 #App Execution
 
@@ -36,7 +38,7 @@ while attempts < 4
     username = gets.chomp.downcase
     print "Password: "
     password = gets.chomp
-    authentication = auth_user(username, password, users)
+    authentication = Bauth.authenticate_user(username, password, users)
     break if authentication == true
     puts "press n to quit or any other key to continue: "
     input = gets.chomp.downcase
